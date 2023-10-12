@@ -8,6 +8,13 @@
        (counter a (- counter 1)))
     ((= counter 0) result)))
 
+(define (iter-rec a b)
+  (define (help count result)
+    (if (= count 0)
+        result
+        (help (- count 1) (+ result b))))
+        (help a 0))
+
 (define (double x) (+ x x))
 (define (halve x) (/ x 2))
 
