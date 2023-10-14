@@ -26,6 +26,12 @@
     ((even? a) (+ (double (rec-fast-multiply (halve a) b))))
     (else (+ b (rec-fast-multiply (- a 1) b)))))
 
+(define (rfm a b)
+  (cond
+    ((= a 0) 0)
+    ((even? a) (rec-fast-multiply (halve a) (double b)))
+    (else (+ b (rec-fast-multiply (- a 1) b)))))
+
 (define (iter-fast-multiply a b)
   (define (iter-counter a b res)
     (cond
