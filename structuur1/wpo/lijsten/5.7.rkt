@@ -14,7 +14,7 @@
   (iter  (iter lst1 '()) lst2))
 
 
-(define (my-append lst1 lst2)
+(define (my-append-iter3 lst1 lst2)
   (define (iter lst1 lst2 res)
       (if (and (null? lst1) (null? lst2))
           res
@@ -22,3 +22,18 @@
               (iter lst2 lst1 res)
               (iter (cdr lst1) lst2 (cons (car lst1) res)))))
     (reverse (iter lst1 lst2 '())))
+
+(define (my-append3 lst1 lst2)
+  (define (iter lst res)
+    (cond
+      ((null? lst) res)
+      (else (iter (cdr lst)(cons (car lst) res)))))
+  (iter (reverse lst1) lst2))
+
+
+(define (my-append lst1 lst2)
+  (define (iter lst res)
+    (cond
+      ((null? lst) (reverse res))
+      (else (iter (cdr lst)(cons (car lst) res)))))
+  (iter lst2 (reverse lst1)))
