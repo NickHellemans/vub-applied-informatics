@@ -1,0 +1,1 @@
+(define (discount p d) (- p (* p (/ d 100))))
