@@ -1,3 +1,4 @@
+#lang racket
 (#%require racket/trace)
 
 (define (rec-accumulate-lists lst1 lst2)
@@ -5,7 +6,6 @@
     ((and (null? lst1) (null? lst2)) 0)
     ((null? lst1) (rec-sum-lists lst2 lst1))
     (else (+ (car lst1) (rec-sum-lists (cdr lst1) lst2)))))
-
 
 (define (rec-sum-lists lst1 lst2)
   (cond
