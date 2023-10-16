@@ -10,3 +10,9 @@
         prev
         (iter (car lst) (cdr lst))))
   (iter #f lst))
+
+(define (last2 lst)
+  (cond
+    ((null? lst) #f)
+    ((null? (cdr lst)) (car lst))
+    (else (last2 (cdr lst)))))

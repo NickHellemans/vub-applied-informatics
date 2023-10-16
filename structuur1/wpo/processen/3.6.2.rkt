@@ -7,5 +7,9 @@
   (depth-counter 0 x))
 
 
-
+(define (depth-weird-rec x)
+  (cond
+    ((= x 1) 0)
+    ((even? x) (+ 1 (depth-weird-rec (/ x 2))))
+    (else (+ 1 (depth-weird-rec (+ (* 3 x) 1))))))
                  

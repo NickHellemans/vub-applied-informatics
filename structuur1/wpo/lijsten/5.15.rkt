@@ -1,5 +1,23 @@
 (#%require racket/trace)
 
+;Oplossing
+(define (merge-n-opl l1 l2 n)
+  (define (hulp l1 l2 i)
+    (cond
+       ((null? l1) l2)
+       ((= i n) (hulp l2 l1 0))
+       (else (cons (car l1) (hulp (cdr l1) l2 (+ i 1 ))))))
+  (hulp l1 l2 0))
+
+(define (merge-iter-opl l1 l2 n)
+  (define (iter l1 l2 i res)
+    (cond
+      ((null? l1) (append (reverse res) l2))
+      ((= i n ) (iter l2 l1 0 res))
+      (else (iter (cdr l1) l2 (+ i 1) (cons (car l1) res)))))
+  (iter l1 l2 0 '()))
+
+;Eigen kweek
 (define (rec-merge-n-2 lst1 lst2 n)
   (define (merge-helper lst1 lst2 ctr)
     (cond

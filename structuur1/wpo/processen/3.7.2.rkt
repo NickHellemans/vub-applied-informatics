@@ -15,5 +15,9 @@
     ((odd? n) (display "1"))
     (else (display "0"))))
 
+(define (dpb2 n)
+  (if (> n 1)
+      (dpb2 (quotient n 2)))
+  (display (modulo n 2)))
           
 ;(trace display-as-binary)

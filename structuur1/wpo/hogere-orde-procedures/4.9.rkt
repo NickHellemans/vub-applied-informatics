@@ -14,8 +14,14 @@
 (define (add a b)
   (accumulate + b (lambda (x) 1) (- a) (lambda (x) (+ x 1)) (- 1)))
 
+(define (add2 a b)
+  (accumulate + a (lambda (x) 1) 1 (lambda (x) (+ x 1)) b))
+
 (define (multiply a b)
   (accumulate + 0 (lambda (x) b) (- a) (lambda (x) (+ x 1)) (- 1)))
+
+(define (multiply2 a b)
+  (accumulate + 0 (lambda (x) a) 1 (lambda (x) (+ x 1)) b))
 
 (#%require racket/trace)
 (trace accumulate)
