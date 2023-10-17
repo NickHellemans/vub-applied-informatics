@@ -1,0 +1,11 @@
+(define (atom? x)
+    (not (pair? x)))
+    
+(define (same-structure? lst1 lst2)
+    (cond ((and (null? lst1) (null? lst2)) #t)
+          ((or (null? lst1) (null? lst2)) #f)
+          ((and (atom? lst1) (atom? lst2)) #t)
+          ((or (atom? lst1) (atom? lst2)) #f)
+          ((and (pair? lst1) (pair? lst2)) (or #t (same-structure? (car lst1) (car lst2)) (same-structure? (cdr lst1) (cdr lst2))))
+          ((or (pair? lst1) (pair? lst2)) #f)
+           (else #f)))

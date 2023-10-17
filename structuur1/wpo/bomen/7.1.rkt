@@ -1,9 +1,11 @@
 (define (atom? x)
     (not (pair? x)))
     
-(define (tree-procedure-rec lst)
-    (cond ((null? lst) base-result)
-           ((atom? lst) atom-result)
-           (else (combine-branches (tree-procedure-rec (car lst))
-                                   (tree-procedure-rec (cdr lst))))))
+(define (depth lst)
+
+  (define helper lst res)
+    (cond ((null? lst) 0)
+           ((atom? lst) 1)
+           (else (+ (helper (car lst) (+ res 1)))))
+  (
 
