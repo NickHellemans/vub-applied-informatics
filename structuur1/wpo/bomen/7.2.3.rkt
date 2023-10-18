@@ -6,15 +6,21 @@
            ((atom? lst) 1)
            (else (+ (leaf-count (car lst)) (leaf-count (cdr lst))))))
 
-(define (depth-and-leaf-count lst)
-  (define (helper lst res ctr)
-    (cond
-      ((null? lst) (cons res ctr))
-      ((atom? lst) (cons res ctr))
-      (else (helper (car lst) (+ res 1) (+ ctr 1)))))
-  (if (null? lst)
-      0
-      (let ((left (helper (car lst) 0 0))
-            (right (helper (cdr lst) 0 0)))
-        (if (> (car left) (car right)) (cons (car left) (+ (cdr left) (cdr right))) (cons (car right) (+ (cdr left) (cdr right)))))))
 
+(define (depth lst)
+  (cond
+    ((null? lst) 0)
+    ((atom? lst) 0)
+    (else (max (+ 1 (depth (car lst)))
+               (depth (cdr lst))))))
+
+(define (depth-and-leaf-count lst)
+    (cond
+      ((null? lst) (cons 0 0))
+      ((atom? lst) (cons 0 1))
+     (else
+      (let ((left (depth-and-leaf-count (car lst)))
+            (right (depth-and-leaf-count (cdr lst))))
+        (cons (max (+ 1 (car left))
+                   (car right))
+              (+ (cdr left) (cdr right)))))))
