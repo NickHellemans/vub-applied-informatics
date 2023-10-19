@@ -4,9 +4,8 @@
 (define (bewerk-boom boom doe-blad doe-appel combiner init)
   (cond
     ((null? boom) init)
-    ((atom? boom) init)
+    ((atom? boom) (if (equal? boom 'blad) (doe-blad boom) init))
     ((equal? (car boom) 'appel) (doe-appel (cdr boom)))
-    ((equal? (car boom) 'blad) (doe-blad (car boom)))
     (else (combiner (bewerk-boom (car boom) doe-blad doe-appel combiner init)
                     (bewerk-boom (cdr boom) doe-blad doe-appel combiner init)))))
 
@@ -32,7 +31,7 @@
 
 (define (all-apples-dmv-bewerk boom)
     (bewerk-boom  boom
-                (lambda (blad) :::)
+                (lambda (blad) '())
                 (lambda (appel) (list appel))
                 (lambda (car cdr) (append car cdr))
                 '()))
