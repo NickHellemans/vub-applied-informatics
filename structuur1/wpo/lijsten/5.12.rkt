@@ -26,6 +26,7 @@
   (iter lst1 lst2 '()))
 
 
+;oplossing
 (define (iter-sum-lists2 lst1 lst2)
   (define (iter lst1 lst2 res)
     (cond

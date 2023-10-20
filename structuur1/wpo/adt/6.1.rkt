@@ -16,7 +16,8 @@
 (define (end-punt segment)
   (cdr segment))
 
+
 (define (middelpunt segment)
-  (let ((centerX (/ (+ (caar segment) (cadr segment)) 2))
-        (centerY (/ (+ (cdar segment) (cddr segment)) 2)))
+  (let ((centerX (/ (+ (x (start-punt segment)) (x (end-punt segment))) 2))
+        (centerY (/ (+ (y (start-punt segment)) (y (end-punt segment))) 2)))
         (make-punt centerX centerY)))
