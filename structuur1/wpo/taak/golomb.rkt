@@ -9,4 +9,25 @@
     ((> i n))
     (display (golomb i))
     (display " ")))
-       
+
+
+(define (golomb-reeks-rec n)
+  (define (iter ctr)
+    (cond
+      ((= ctr n) (display (golomb ctr)))
+      (else (display (golomb ctr)) (display " ") (iter (+ ctr 1)))))
+  (iter 1))
+
+(define (golomb-reeks-rec2 n)
+  (cond
+    ((= 1 n) (display (golomb n)) (display " "))
+    (else (golomb-reeks-rec2 (- n 1)) (display (golomb n)) (display " "))))
+
+(define (golomb-reeks-opl n)
+  (define (iter ctr)
+    (if (<= ctr n)
+        (begin
+          (display (golomb ctr))
+          (display " ")
+        (iter (+ ctr 1)))))
+  (iter 1))

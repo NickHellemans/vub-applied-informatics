@@ -6,7 +6,23 @@
         x
      (opbrengst (+ x (* (/ x 100.0) c)) c (- n 1))))
 
+(define (opbrengst3 x c n)
+  (define (helper x n)
+    (if (= n 0)
+        0
+     (+ (* (/ x 100.0) c) (helper (+ x (* (/ x 100.0) c)) (- n 1)))))
+  (+ x (helper x n)))
+
+(define (opbrengst4 x c n)
+    (define interest (+ 1 (* c 0.01)))
+    (cond
+        ((= n 0) x)
+        (else (opbrengst (* x interest) c (- n 1)))
+    )
+)
+
 (trace opbrengst)
+(trace opbrengst3)
   
 (define (opbrengst2 x c n)
  (define (iter x n res)
@@ -15,6 +31,29 @@
        (iter (+ x (* (/ x 100.0) c)) (- n 1) (+  (* (/ x 100.0) c) res))))
   (iter x n x))
 
+
+
+;;Niels
+
+; Recursive
+(define (opbrengstNR x c n)
+    (define interest (+ 1 (* c 0.01)))
+    (cond
+        ((= n 0) x)
+        (else (* (opbrengstNR x c (- n 1)) interest))
+    )
+)
+
+(trace opbrengstNR)
+
+; Iterative
+(define (opbrengstNI x c n)
+    (define interest (+ 1 (* c 0.01)))
+    (cond
+        ((= n 0) x)
+        (else (opbrengstNI (* x interest) c (- n 1)))
+    )
+)
 ;2 a
 (define (aantal-positief lst)
   (cond
