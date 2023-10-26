@@ -1,4 +1,4 @@
-(define VUBOrganigram
+(define organigram
   '(VUB (academisch (rectoraat)
                     (faculteiten
                      (rechten (bachelor (ba-rechten)
@@ -45,4 +45,23 @@
             (print-organigram (cdr organigram) ctr))))
   (find-label label organigram))
 
-  
+
+;7.13.2
+(define (print-tot organigram niveau)
+  (define (atom? el) (not (pair? el)))
+  (define (print-organigram organigram ctr)
+    (cond
+      ((null? organigram) (display ""))
+      ((> ctr niveau) (display ""))
+      ((atom? organigram) (print-lijn ctr organigram))
+      (else (print-organigram (car organigram) (+ ctr 1))
+            (print-organigram (cdr organigram) ctr))))
+  (print-organigram organigram -1))
+
+
+
+
+
+
+
+

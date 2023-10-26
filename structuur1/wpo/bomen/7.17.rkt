@@ -1,0 +1,8 @@
+(define familieboom '(jan (piet (frans (tom)
+                                       (roel))
+                                (mie))
+                          (bram (inge (bert (ina)
+                                            (ilse))
+                                      (bart))
+                                (iris))
+                          (joost (els (ilse)))))

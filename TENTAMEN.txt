@@ -12,3 +12,4 @@ Logica
 	- Bekijk oefeningen
 	- Maak oefeningen opnieuw
 	- Leer formulariums semantiek en afleidingen
+
