@@ -74,3 +74,5 @@
       (else (or (bazen-van (car trees) path)
                 (bazen-van-in (cdr trees) path)))))
    (bazen-van tree '()))
+
+

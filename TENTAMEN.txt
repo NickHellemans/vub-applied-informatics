@@ -1,11 +1,3 @@
-Structuur
-	
-	- Bekijk theorie
-	- Bekijk oefeningen
-	- Bekijk vb examen
-	- Bekijk taak -> probeer resursief op te lossen ipv do loop
-	- Probeer oefeningen opnieuw + first try
-
 Logica
 	
 	- Bekijk theorie

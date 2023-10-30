@@ -1,5 +1,13 @@
 (#%require racket/trace)
 
+
+(define (merger lst1 lst2)
+  (define (helper lst1 lst2 res ctr)
+    (cond
+      ((null? lst1) (append res lst2))
+      ((= ctr 0) (helper lst2 lst1 res 1))
+      (else (helper (cdr lst1) lst2 (append res (list (car lst1))) (- ctr 1)))))
+  (helper lst1 lst2 '() 1))
 ;Oplossing
 (define (merge-n-opl l1 l2 n)
   (define (hulp l1 l2 i)
