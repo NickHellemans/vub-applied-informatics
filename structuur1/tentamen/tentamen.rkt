@@ -50,6 +50,27 @@
       ;List moet hier eigenlijk niet (zorgt voor extra haakjes), wel gedaan op tentamen
       (cons (list (car-n lst n)) (vorm-lijstjes (cdr-n lst n) n))))
 
+;Versie Niels
+
+(#%require racket/trace)
+
+(define (maak-koppels lst) 
+    (define (iter new old koppel c)
+        (if (null? old)
+            new
+            (let 
+                ((temp (append koppel (list (car old)))))
+                (if (= 1 c)
+                    (iter (append new (list temp)) (cdr old) '() 3)
+                    (iter new (cdr old) temp (- c 1)))
+            )
+        )
+    )
+  (trace iter)
+    (iter '() lst '() 3)
+)
+
+
 ;4
 (define (f x y)
     (let (

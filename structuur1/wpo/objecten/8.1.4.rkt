@@ -1,0 +1,5 @@
+(define flip (make-flip))
+(define flap1 (flip))
+(define (flap2) (flip))
+(define flap3 flip)
+(define (flap4) flip)

@@ -1,0 +1,4 @@
+WISKUNDE
+
+	LIMIETEN:
+		- f(x) < g(x) --> lim f(x) < lim g(x)? Neen, altijd <= (bv beiden limieten kunnen 0 zijn)

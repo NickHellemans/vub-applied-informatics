@@ -1,0 +1,5 @@
+Vragen
+
+Algo:
+
+	Pattern matching: QS (table), KMP (k)

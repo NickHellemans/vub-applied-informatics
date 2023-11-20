@@ -1,0 +1,5 @@
+(define (make-random m a seed)
+  (let ((next seed))
+    (lambda ()
+      (set! next (modulo (* next a) m))
+      (exact->inexact (/ next m)))))
