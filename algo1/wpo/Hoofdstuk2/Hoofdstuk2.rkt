@@ -65,7 +65,7 @@
 ; getalwaarde van het huidige karakter en de huidige macht van 10, die 
 ; oorspronkelijk 1 is en steeds met 10 vermenigvuldigd zal worden.
 (newline)
-(display "(my-string->number \"1234\") -> ") (display (my-string->number "1234")) (newline)
+(display "(my-string->number \"1234\") -> ") (display (my-string->number2 "1234")) (newline)
 
 ; Determine Omega(f(n)) for your algorithm, when n is the length of the string.
 ; -> Omega(n), want er zijn evenveel iteraties als karakters.

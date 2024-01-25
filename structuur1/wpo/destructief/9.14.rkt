@@ -1,40 +1,44 @@
-(define (ontdubbel! l)
-  (let ((new-lst (cons '() '())))
-    (define (iter lst)
+(define (ontdubbel1! l)
+  (let* ((curr-even '(()))
+         (curr-odd '(()))
+         (new-lst (cons curr-even curr-odd)))
+    (define (iter curr-even curr-odd lst)
       (cond
-        ((null? lst) '())
-        ((even? (car lst)) (set-car! new-lst (cons (car lst) (car new-lst))) (iter (cdr lst)))
-        (else (set-cdr! new-lst (cons (car lst) (cdr new-lst))) (iter (cdr lst)))))
-    (iter l)
-    (set-car! new-lst (reverse (car new-lst)))
-    (set-cdr! new-lst (reverse (cdr new-lst)))
+        ((null? lst) (set-car! new-lst (cdr (car new-lst)))  (set-cdr! new-lst (cdr (cdr new-lst))) (set-cdr! curr-even '()) (set-cdr! curr-odd '()))
+        ((even? (car lst))
+         (set-cdr! curr-even lst)
+         (iter lst curr-odd (cdr lst)))
+        (else
+         (set-cdr! curr-odd lst)
+         (iter curr-even lst (cdr lst)))))
+   (iter curr-even curr-odd l)
     new-lst))
 
-(define (last l)
-  (cond
-    ((null? (cdr l)) l)
-    (else (last (cdr l)))))
+(define (ontdubbel! l)
 
-;NO EXTRA CONS CELLS
-;Try:
-; - Keep ref to last of new-lst
-; - Point to node instead of creating new nodes to add
-; - Draw list structure diagram
-(define (ontdubbel2! l)
-  (let ((new-lst (cons '() '())))
-    (define (iter lst)
+  (define (get-first f lst)
+    (cond
+      ((null? lst) '())
+      ((f (cadr lst)) lst)
+      (else (get-first f (cdr lst)))))
+  
+  (let* ((curr-even (if (even? (car l)) l (cdr l)))
+         (curr-odd (if (odd? (car l)) l (cdr l)))
+         (new-lst (cons curr-even curr-odd)))
+    
+    (define (iter curr-even curr-odd lst)
       (cond
-        ((null? lst) '())
+        ((null? lst)(set-cdr! curr-even '()) (set-cdr! curr-odd '()))
         ((even? (car lst))
-         (if (null? (car new-lst))
-             (set-car! new-lst lst)
-             (set-cdr! (last (car new-lst)) lst))
-         (iter (cdr lst)))
-        (else (set-cdr! new-lst (cons (car lst) (cdr new-lst))) (iter (cdr lst)))))
-    (iter l)
-    (set-car! new-lst (reverse (car new-lst)))
-    (set-cdr! new-lst (reverse (cdr new-lst)))
+          (set-cdr! curr-even lst)
+         (iter lst curr-odd (cdr lst)))
+        (else
+         (set-cdr! curr-odd lst)
+         (iter curr-even lst (cdr lst)))))
+   (iter curr-even curr-odd (cddr l))
     new-lst))
 
 
 (define test '(1 2 3 4 5 6 7 8 9 10))
+
+(ontdubbel! test)

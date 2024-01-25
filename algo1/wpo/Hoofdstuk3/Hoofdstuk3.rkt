@@ -111,6 +111,7 @@
 ; Daar dien je de implementatie van de procedures make-list-node etc. aan te passen zodat 
 ; een node wordt voorgesteld door een vector van lengte 2.
 
+
 (define (make-list-node x y) (vector x y))
 (define list-node-val (lambda (vector-node) (vector-ref vector-node 0)))
 (define list-node-val! (lambda (vector-node value) (vector-set! vector-node 0 value)))
@@ -130,10 +131,22 @@
               (loop (plist:next p current-pos) new-res)
               new-res)))))
 
+(define (accumulate-my p null combiner)
+  (cond
+    ((plist:empty? p) null)
+    (else
+     (let loop
+       ((curr (plist:first p))
+        (res null))
+       (let ((new-res (combiner res (plist:peek p curr))))
+         (if (plist:has-next? p curr)
+             (loop (plist:next p curr) new-res)
+             new-res))))))
+
 (define n (plist:from-scheme-list '(1 2 3 4 5) =))
-(display "(accumulate n 0 +)              -> ") (display (accumulate n 0 +)) (newline)
+(display "(accumulate n 0 +)              -> ") (display (accumulate-my n 0 +)) (newline)
 (define o (plist:from-scheme-list '("a" "b" "c") eq?))
-(display "(accumulate o \"\" string-append) -> ") (display (accumulate o "" string-append)) (newline)
+(display "(accumulate o \"\" string-append) -> ") (display (accumulate-my o "" string-append)) (newline)
 
 ; Oefening 6.
 (define (intersection p1 p2)
@@ -150,9 +163,22 @@
               (loop (plist:next p1 current-pos))
               result)))))
 
+(define (my-intersection p1 p2)
+  (define res (plist:new eq?))
+  (cond
+    ((or (plist:empty? p1) (plist:empty? p2)) res)
+    (else
+     (let loop
+       ((curr (plist:first p1)))
+       (let ((curr-val (plist:peek p1 curr)))
+         (cond
+           ((plist:find p2 curr-val) (plist:add-after! res curr-val)))
+         (if (plist:has-next? p1 curr)
+             (loop (plist:next p1 curr))
+             res))))))
 (define p (plist:from-scheme-list '(2 4 6 8 10 12 14) eq?))
 (define q (plist:from-scheme-list '(3 6 9 12 15 18 21) eq?))
-(display "(intersection p q) -> ")(display-plist (intersection p q))
+(display "(intersection p q) -> ")(display-plist (my-intersection p q))
 
 ; Oefening 8.
 ; Voor deze oefening moet je eigenlijk de (a-d sorted-list vectorial) library 

@@ -99,3 +99,18 @@
 (define auto1 (maak-auto 30))
 (define auto2 (maak-auto 50))
 (define auto3 (maak-auto 90))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

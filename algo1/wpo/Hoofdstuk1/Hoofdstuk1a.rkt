@@ -138,7 +138,6 @@
 ;   Cf. worst case performance.
 
 ; Exercise 8
-
 (define (all-but-first-n l n)
   (define (iterate current counter)
     (if (or (= counter 0)

@@ -40,6 +40,24 @@
           (loop (cdr current)))))) ; tenslotte roepen we de named let op met als nieuwe current de cdr van de huidige current
 (display "(postfix-eval (list 5 6 + 7 -))     ->    ") (display (postfix-eval (list 5 6 + 7 -))) (newline)
 
+(define (my-postfix-eval expression)
+  (define stack (stack:new))
+  (let loop
+    ((curr expression))
+    (cond
+      ((null? curr) (stack:pop! stack))
+      (else
+       (let ((el (car curr)))
+         (cond
+           ((number? el) (stack:push! stack el))
+           (else
+            (let ((op2 (stack:pop! stack))
+                  (op1 (stack:pop! stack)))
+              (stack:push! stack (el op1 op2)))))
+         (loop (cdr curr)))))))
+
+(display "(my-postfix-eval (list 5 6 + 7 -))     ->    ") (display (my-postfix-eval (list 5 6 + 7 -))) (newline)
+
 ; -> Tweede mogelijke oplossing, die een iteratieve hulpprocedure gebruikt om over de elementen van de expressie te itereren:
 (define (postfix-eval2 expression)
   (define stack (stack:new))

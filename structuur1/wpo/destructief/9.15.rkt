@@ -1,15 +1,3 @@
-(define (insert2! lst1 lst2)
-  
-  (define (last lst)
-    (cond
-      ((null? lst) '())
-      ((null? (cdr lst)) lst)
-      (else (last (cdr lst)))))
-
-  (cond
-    ((null? lst2) (display-lst lst1))
-    (else (set-cdr! (last (car lst1)) (car lst2)) (insert! (cdr lst1) (cdr lst2)))))
-
 (define (insert! lst1 lst2)
   (define (last lst)
     (cond
@@ -20,7 +8,11 @@
   (define (inserter l1 l2)
     (cond
       ((null? l2))
-      (else (set-cdr! (last (car l1)) (last (reverse l2))) (set-car! l2 (cdr l2)) (insert2! (cdr l1) (cdr l2)))))
+      (else
+       (let ((next-symbol (cdr l2)))
+         (set-cdr! (last (car l1)) l2)
+         (set-cdr! l2 '())
+         (insert! (cdr l1) next-symbol)))))
   
   (inserter lst1 lst2)
   lst1)

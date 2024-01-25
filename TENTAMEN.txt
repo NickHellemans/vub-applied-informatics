@@ -1,8 +1,0 @@
-Logica
-	
-	- Bekijk theorie
-	- Bekijk oefeningen
-	- Maak oefeningen opnieuw
-	- Leer formulariums semantiek en afleidingen
-	- Bewijstechnieken: Leer bewijzen slides
-
